@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AutoCAD Plumbing Design — Charter Center</title>
+  <meta name="description" content="Professional plumbing design programme: manual calculations, AutoCAD drafting, Revit BIM, and Charter Center certification." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/css/main.css" rel="stylesheet" />
+  <link rel="icon" href="https://charter-center.com/admin-lte-3/img/logo-badge.svg" />
+</head>
+<body class="page-course">
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="logo" href="index.html"><img src="assets/img/logo.svg" alt="Charter Center" /></a>
+      <ul class="nav-links">
+        <li class="has-mega" id="navCategories">
+          <button type="button" class="nav-mega-btn" id="categoriesBtn" aria-expanded="false" aria-controls="megaMenu">
+            <i data-lucide="layout-grid" class="nav-explore-icon"></i> Explore <i data-lucide="chevron-down" class="icon-chevron"></i>
+          </button>
+        </li>
+        <li><a class="nav-join" href="https://charter-center.com/join-our-experts" target="_blank" rel="noopener"><i data-lucide="users"></i> <span class="nav-join-text">Join Our </span>Experts</a></li>
+        <li class="has-drop" id="navMore">
+          <button type="button" class="nav-drop-btn" id="moreBtn" aria-expanded="false" aria-controls="moreMenu">
+            More <i data-lucide="chevron-down" class="icon-chevron"></i>
+          </button>
+          <div class="nav-drop-menu" id="moreMenu" hidden>
+            <a href="https://charter-center.com/events" target="_blank" rel="noopener">Events</a>
+            <a href="https://charter-center.com/blogs" target="_blank" rel="noopener">Blogs</a>
+            <a href="https://charter-center.com/libraries" target="_blank" rel="noopener">Library</a>
+            <a href="https://charter-center.com/help" target="_blank" rel="noopener">Help</a>
+            <a href="https://charter-center.com/accreditation" target="_blank" rel="noopener">Accreditation</a>
+          </div>
+        </li>
+        <li class="has-drop" id="navLang">
+          <button type="button" class="nav-drop-btn" id="langBtn" aria-expanded="false" aria-controls="langMenu">
+            <img src="https://flagcdn.com/w20/us.png" alt="" width="18" height="12" /> English <i data-lucide="chevron-down" class="icon-chevron"></i>
+          </button>
+          <div class="nav-drop-menu" id="langMenu" hidden>
+            <a href="https://charter-center.com/language/ar" target="_blank" rel="noopener">Arabic</a>
+            <a href="https://charter-center.com/language/en" target="_blank" rel="noopener">English</a>
+          </div>
+        </li>
+      </ul>
+      <div class="nav-search" id="navSearch">
+        <label class="visually-hidden" for="navSearchInput">Search courses</label>
+        <div class="nav-search-field">
+          <i data-lucide="search" aria-hidden="true"></i>
+          <input type="search" id="navSearchInput" placeholder="Search courses" autocomplete="off" />
+        </div>
+        <div class="nav-search-panel" id="navSearchPanel" hidden>
+          <p class="nav-search-status" id="navSearchStatus" hidden>Searching…</p>
+          <div class="nav-search-list" id="navSearchList"></div>
+          <p class="nav-search-empty" id="navSearchEmpty" hidden>No courses found</p>
+        </div>
+      </div>
+      <div class="nav-actions">
+        <a class="nav-icon" href="https://charter-center.com/courses/cart" target="_blank" rel="noopener" aria-label="Cart"><i data-lucide="shopping-bag"></i></a>
+        <a class="nav-icon" href="https://charter-center.com/courses/wishlist" target="_blank" rel="noopener" aria-label="Wishlist"><i data-lucide="heart"></i></a>
+        <a class="btn btn-ghost" href="login.html">Log In</a>
+        <a class="btn btn-primary" href="signup.html">Join for Free</a>
+      </div>
+      <button class="menu-toggle" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobileNav"><i data-lucide="menu"></i></button>
+    </div>
+  </header>
+
+  <div class="mega-backdrop" id="megaBackdrop" aria-hidden="true"></div>
+  <div class="mega-menu" id="megaMenu" role="dialog" aria-label="Explore categories" aria-hidden="true">
+    <div class="mega-shell">
+      <aside class="mega-cats" id="megaCats"></aside>
+      <div class="mega-main">
+        <div class="mega-subs-wrap">
+          <div class="mega-col-title">Subcategories</div>
+          <div class="mega-subs" id="megaSubs"><div class="mega-empty">Hover a category to browse</div></div>
+        </div>
+        <div class="mega-courses-wrap">
+          <div class="mega-col-head">
+            <div class="mega-col-title">Popular courses</div>
+            <a class="mega-viewall" id="megaViewAll" href="https://charter-center.com/" target="_blank" rel="noopener">View all</a>
+          </div>
+          <div class="mega-courses" id="megaCourses"><div class="mega-empty">Select a subcategory</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mobile-nav-backdrop" id="mobileNavBackdrop" aria-hidden="true"></div>
+  <aside class="mobile-sidebar" id="mobileNav" aria-hidden="true" aria-label="Menu">
+    <div class="mobile-sidebar-inner">
+      <header class="mobile-sidebar-head">
+        <a class="mobile-brand" href="index.html"><img src="assets/img/logo.svg" alt="Charter Center" /></a>
+        <button type="button" class="mobile-close" id="mobileClose" aria-label="Close menu"><i data-lucide="x"></i></button>
+      </header>
+
+      <div class="mobile-sidebar-search">
+        <label class="visually-hidden" for="mobileSidebarSearch">Search courses</label>
+        <div class="mobile-search-field">
+          <i data-lucide="search" aria-hidden="true"></i>
+          <input type="search" id="mobileSidebarSearch" placeholder="Search courses" autocomplete="off" enterkeyhint="search" />
+        </div>
+        <div class="mobile-search-panel" id="mobileSearchPanel" hidden>
+          <p class="mobile-search-status" id="mobileSearchStatus" hidden>Searching…</p>
+          <div class="mobile-search-list" id="mobileSearchList"></div>
+          <p class="mobile-search-empty" id="mobileSearchEmpty" hidden>No courses found</p>
+        </div>
+      </div>
+
+      <div class="mobile-sidebar-body">
+        <nav class="mobile-nav-primary" aria-label="Primary">
+          <a class="mobile-nav-featured" href="https://charter-center.com/join-our-experts" target="_blank" rel="noopener">
+            <span class="mobile-nav-ico"><i data-lucide="users"></i></span>
+            <span class="mobile-nav-copy">
+              <strong>Join our experts</strong>
+              <em>Teach with Charter</em>
+            </span>
+            <i data-lucide="chevron-right" class="mobile-nav-chevron"></i>
+          </a>
+        </nav>
+
+        <p class="mobile-section-label">Menu</p>
+        <nav class="mobile-nav-list" aria-label="Site">
+          <a href="https://charter-center.com/events" target="_blank" rel="noopener"><span class="mobile-nav-ico"><i data-lucide="calendar"></i></span><span>Events</span><i data-lucide="chevron-right" class="mobile-nav-chevron"></i></a>
+          <a href="https://charter-center.com/blogs" target="_blank" rel="noopener"><span class="mobile-nav-ico"><i data-lucide="newspaper"></i></span><span>Blogs</span><i data-lucide="chevron-right" class="mobile-nav-chevron"></i></a>
+          <a href="https://charter-center.com/libraries" target="_blank" rel="noopener"><span class="mobile-nav-ico"><i data-lucide="library"></i></span><span>Library</span><i data-lucide="chevron-right" class="mobile-nav-chevron"></i></a>
+          <a href="https://charter-center.com/help" target="_blank" rel="noopener"><span class="mobile-nav-ico"><i data-lucide="circle-help"></i></span><span>Help</span><i data-lucide="chevron-right" class="mobile-nav-chevron"></i></a>
+          <a href="https://charter-center.com/accreditation" target="_blank" rel="noopener"><span class="mobile-nav-ico"><i data-lucide="badge-check"></i></span><span>Accreditation</span><i data-lucide="chevron-right" class="mobile-nav-chevron"></i></a>
+        </nav>
+
+        <div class="mobile-sidebar-util">
+          <a href="https://charter-center.com/courses/cart" target="_blank" rel="noopener">
+            <span class="mobile-nav-ico"><i data-lucide="shopping-bag"></i></span>
+            <span>Cart</span>
+          </a>
+          <a href="https://charter-center.com/courses/wishlist" target="_blank" rel="noopener">
+            <span class="mobile-nav-ico"><i data-lucide="heart"></i></span>
+            <span>Wishlist</span>
+          </a>
+        </div>
+
+        <div class="mobile-lang" role="group" aria-label="Language">
+          <a class="is-active" href="https://charter-center.com/language/en" target="_blank" rel="noopener">
+            <img src="https://flagcdn.com/w40/us.png" alt="" width="18" height="13" /> English
+          </a>
+          <a href="https://charter-center.com/language/ar" target="_blank" rel="noopener">
+            <img src="https://flagcdn.com/w40/sa.png" alt="" width="18" height="13" /> العربية
+          </a>
+        </div>
+      </div>
+
+      <footer class="mobile-sidebar-foot">
+        <a class="mobile-foot-primary" href="signup.html">Join for Free</a>
+        <a class="mobile-foot-secondary" href="login.html">Log in</a>
+      </footer>
+    </div>
+  </aside>
+
+  <main class="course-detail">
+    <div class="wrap course-shell">
+        <div class="course-intro">
+          <nav class="course-crumbs" aria-label="Breadcrumb">
+            <a href="index.html" class="course-crumb-home" aria-label="Home">
+              <i data-lucide="home"></i>
+            </a>
+            <i data-lucide="chevron-right" class="course-crumb-chevron" aria-hidden="true"></i>
+            <a href="index.html#courses">Courses</a>
+            <i data-lucide="chevron-right" class="course-crumb-chevron" aria-hidden="true"></i>
+            <span class="course-crumb-current">Course details</span>
+          </nav>
+          <div class="course-badge-row">
+            <span class="course-type-pill">Recorded course</span>
+            <span class="course-level-pill">Professional</span>
+          </div>
+          <h1>AutoCAD Plumbing Design</h1>
+          <p class="course-lead">A 60–80 hour professional programme that builds practical, code-compliant plumbing design competence — from manual calculation through AutoCAD drafting and Revit BIM modeling.</p>
+          <div class="course-hero-meta">
+            <div class="course-instructor-chip">
+              <img src="https://charter-center.com/storage/2965/WhatsApp-Image-2026-08-29-at-9.59.30-AM.jpeg" alt="" width="40" height="40" />
+              <div>
+                <span>Instructor</span>
+                <strong>Montser Mohamed</strong>
+              </div>
+            </div>
+            <div class="course-stat-chips">
+              <span><i data-lucide="clock-3"></i> 31h 02m</span>
+              <span><i data-lucide="play-circle"></i> 86 lectures</span>
+              <span><i data-lucide="folder-down"></i> 42 resources</span>
+              <span><i data-lucide="badge-check"></i> Certificate</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="course-buy-card" id="courseBuyCard">
+          <div class="course-buy-media">
+            <img src="https://charter-center.com/storage/2966/pD9kK2246amnZ6cO1JoRiV9OcmRJo0Yc2YpuTY4KohBIgXS1FDDbDdNqvQws.png" alt="AutoCAD Plumbing Design" />
+          </div>
+          <div class="course-buy-body">
+            <div class="course-price-row">
+              <span class="course-price">SAR 999.00</span>
+              <span class="course-price-note">One-time access</span>
+            </div>
+            <a class="btn btn-primary course-buy-btn" href="https://charter-center.com/courses/details/228/autocad-plumbing-design" target="_blank" rel="noopener">Buy now</a>
+            <a class="btn btn-ghost course-wish-btn" href="https://charter-center.com/courses/wishlist" target="_blank" rel="noopener"><i data-lucide="heart"></i> Wishlist</a>
+            <ul class="course-includes">
+              <li><i data-lucide="check"></i> 31h 02m 36s of video</li>
+              <li><i data-lucide="check"></i> 86 lectures</li>
+              <li><i data-lucide="check"></i> 42 downloadable resources</li>
+              <li><i data-lucide="check"></i> Certificate of completion</li>
+              <li><i data-lucide="check"></i> AutoCAD &amp; Revit project work</li>
+            </ul>
+            <a class="course-download-link" href="https://charter-center.com/courses/details/228/autocad-plumbing-design" target="_blank" rel="noopener"><i data-lucide="download"></i> Download course details</a>
+          </div>
+        </aside>
+
+        <div class="course-main">
+          <div class="course-tabs" role="tablist" aria-label="Course sections">
+            <button type="button" class="is-active" data-tab="overview" role="tab" aria-selected="true">Overview</button>
+            <button type="button" data-tab="curriculum" role="tab" aria-selected="false">Curriculum</button>
+            <button type="button" data-tab="requirements" role="tab" aria-selected="false">Requirements</button>
+            <button type="button" data-tab="reviews" role="tab" aria-selected="false">Reviews</button>
+          </div>
+
+          <div class="course-panels">
+            <article class="course-panel is-active" id="panel-overview" role="tabpanel">
+              <h2>Overview</h2>
+              <p>A 60–80 hour, professional-level programme that builds practical, code-compliant plumbing design competence from manual calculation through AutoCAD drafting and Revit BIM modeling — for mechanical and MEP engineers, BIM modelers and CAD technicians, engineering students, and career-starters entering plumbing design across Saudi Arabia, the UAE, and the wider GCC, culminating in the Charter Center certification exam.</p>
+
+              <h3>Plumbing Design System — Full Curriculum</h3>
+              <p>Seven modules guiding learners from plumbing design foundations and code fundamentals through fixture selection, manual calculations, AutoCAD drafting, and Revit BIM modeling, followed by the Charter Center certification exam.</p>
+
+              <div class="course-highlights">
+                <article>
+                  <span class="course-highlight-ico"><i data-lucide="calculator"></i></span>
+                  <h4>From calculation to AutoCAD &amp; Revit</h4>
+                  <p>Fixture unit and pipe sizing first, then construction-ready AutoCAD drawings, then coordinated 3D Revit models.</p>
+                </article>
+                <article>
+                  <span class="course-highlight-ico"><i data-lucide="book-marked"></i></span>
+                  <h4>Grounded in SBC 701</h4>
+                  <p>Design decisions anchored to the Saudi Plumbing Code, with comparative UAE and Qatar code awareness.</p>
+                </article>
+                <article>
+                  <span class="course-highlight-ico"><i data-lucide="pen-tool"></i></span>
+                  <h4>Real AutoCAD project</h4>
+                  <p>Build a complete plumbing package — layout, risers, routing, and fixture schedules — from brief to final set.</p>
+                </article>
+                <article>
+                  <span class="course-highlight-ico"><i data-lucide="award"></i></span>
+                  <h4>Certification exam included</h4>
+                  <p>Knowledge assessment plus a practical AutoCAD/Revit deliverable for Charter Center certification.</p>
+                </article>
+              </div>
+
+              <h3>Course curriculum — 7 modules + exam</h3>
+              <div class="course-module-list">
+                <details class="course-module" open>
+                  <summary><span>01</span><div><strong>Plumbing Design Foundations &amp; Core Water Systems</strong><em>System types, water supply, hot water systems and the complete design workflow</em></div></summary>
+                  <p>Establishes the complete plumbing engineer’s workflow — from concept through code-compliant construction documents — covering cold water distribution, direct vs tank-fed supply, pressure zoning for high-rise GCC projects, and hot water generation and recirculation design.</p>
+                </details>
+                <details class="course-module">
+                  <summary><span>02</span><div><strong>Plumbing Codes, Standards and Engineering Principles</strong><em>Saudi Plumbing Code (SBC 701), regional GCC standards and core engineering principles</em></div></summary>
+                  <p>Grounds every design decision in enforceable code requirements across water distribution, hot water, sanitary drainage, venting, and graywater rules — plus comparative awareness of Dubai, Abu Dhabi Estidama, and Qatar Construction Specifications.</p>
+                </details>
+                <details class="course-module">
+                  <summary><span>03</span><div><strong>Fixture Piping, Fittings and Accessories</strong><em>Fixture units, piping materials, valves, fittings and accessory selection</em></div></summary>
+                  <p>Covers WSFU/DFU concepts, piping material selection for GCC conditions, valve and fitting types, and accessories that feed directly into the manual calculation modules.</p>
+                </details>
+                <details class="course-module">
+                  <summary><span>04</span><div><strong>Manual Calculations I — Water Supply Sizing</strong><em>Fixture unit demand, pipe sizing and water pressure loss calculations</em></div></summary>
+                  <p>Converts fixture demand into design flow, sizes pipes for velocity and pressure loss, and builds a complete pressure budget from source to fixture — including hot water generation capacity.</p>
+                </details>
+                <details class="course-module">
+                  <summary><span>05</span><div><strong>Manual Calculations II — Drainage &amp; Venting</strong><em>Drainage fixture unit sizing, vent sizing and system verification</em></div></summary>
+                  <p>Completes the calculation package with drain diameters and slopes, vent stack design, and full-system verification before production drawings begin.</p>
+                </details>
+                <details class="course-module">
+                  <summary><span>06</span><div><strong>AutoCAD Plumbing Drafting and Project Production</strong><em>From layout to construction-ready drawings</em></div></summary>
+                  <p>The largest hands-on component: fixture placement, routing, riser diagrams, annotation against calculations, schedules, and a complete coordinated AutoCAD plumbing package.</p>
+                </details>
+                <details class="course-module">
+                  <summary><span>07</span><div><strong>Revit BIM Modeling &amp; Advanced Systems</strong><em>3D modeling, advanced systems and AI-assisted design tools</em></div></summary>
+                  <p>Extends 2D skills into Revit BIM — families, systems, clash detection, greywater and high-rise strategies, plus AI tools as a productivity layer on top of fundamentals.</p>
+                </details>
+                <details class="course-module">
+                  <summary><span>08</span><div><strong>Charter Center Certification Exam</strong><em>Knowledge and practical assessment</em></div></summary>
+                  <p>Capstone exam with knowledge questions across modules 01–05 and a practical AutoCAD/Revit submission for Charter Center’s Plumbing Design System certification.</p>
+                </details>
+              </div>
+
+              <h3>Software, standards &amp; platforms</h3>
+              <div class="course-tags">
+                <span>AutoCAD Plumbing Drafting</span>
+                <span>Autodesk Revit BIM</span>
+                <span>Saudi Plumbing Code (SBC 701)</span>
+                <span>Fixture Unit &amp; Pipe Sizing</span>
+                <span>Drainage &amp; Vent Design</span>
+                <span>Water Supply &amp; Hot Water</span>
+                <span>Greywater Systems</span>
+                <span>AI-Assisted Design Tools</span>
+              </div>
+
+              <div class="course-outcome">
+                <h3>Course outcome</h3>
+                <p>On completing this course, you will be able to perform manual plumbing calculations for water supply, drainage, and venting systems, produce construction-ready AutoCAD plumbing drawings, build coordinated 3D plumbing models in Revit, and apply SBC 701 and regional GCC standards to real design scenarios — earning Charter Center certification and a practical skillset for MEP, BIM, and CAD roles across the GCC.</p>
+                <p class="course-outcome-meta">7 Modules + Certification Exam · AutoCAD &amp; Revit · 60–80 Hours · Charter Center Certified</p>
+              </div>
+            </article>
+
+            <article class="course-panel" id="panel-curriculum" role="tabpanel" hidden>
+              <div class="course-curriculum-head">
+                <h2>Curriculum</h2>
+                <p>14 sections · 86 lectures · 31h 02m 36s</p>
+              </div>
+              <div class="course-curriculum" id="courseCurriculum">
+                <details class="curr-section" open>
+                  <summary><strong>Module 01: Introduction</strong><span>1 lecture</span></summary>
+                  <ul><li><i data-lucide="play-circle"></i><span>1-Introduction</span><em>Video</em></li></ul>
+                </details>
+                <details class="curr-section">
+                  <summary><strong>Module 02: Core Water &amp; Hot Water Systems</strong><span>5 lectures</span></summary>
+                  <ul>
+                    <li><i data-lucide="play-circle"></i><span>2-01 Core Water &amp; Hot Water Systems</span><em>Video</em></li>
+                    <li><i data-lucide="play-circle"></i><span>2-02 Core Water &amp; Hot Water Systems</span><em>Video</em></li>
+                    <li><i data-lucide="play-circle"></i><span>2-03 Core Water &amp; Hot Water Systems</span><em>Video</em></li>
+                    <li><i data-lucide="play-circle"></i><span>2-04 Core Water &amp; Hot Water Systems</span><em>Video</em></li>
+                    <li><i data-lucide="play-circle"></i><span>2-05 Core Water &amp; Hot Water Systems</span><em>Video</em></li>
+                  </ul>
+                </details>
+                <details class="curr-section">
+                  <summary><strong>Module 03: Plumbing Codes and Engineering Standard</strong><span>1 lecture</span></summary>
+                  <ul><li><i data-lucide="play-circle"></i><span>Plumbing Codes and Engineering Standard</span><em>Video</em></li></ul>
+                </details>
+                <details class="curr-section">
+                  <summary><strong>Module 04: Fixture Piping, Fitting And Accessories</strong><span>3 lectures</span></summary>
+                  <ul>
+                    <li><i data-lucide="play-circle"></i><span>4-01 Fixture Piping, Fitting And Accessories</span><em>Video</em></li>
+                    <li><i data-lucide="play-circle"></i><span>4-02 Fixture Piping, Fitting And Accessories</span><em>Video</em></li>
+                    <li><i data-lucide="play-circle"></i><span>4-03 Fixture Piping, Fitting And Accessories</span><em>Video</em></li>
+                  </ul>
+                </details>
+                <details class="curr-section">
+                  <summary><strong>Module 05 (Part I): Manual Calculation</strong><span>8 lectures</span></summary>
+                  <ul>
+                    <li><i data-lucide="play-circle"></i><span>5-01 Manual Calculation</span><em>Video</em></li>
+                    <li><i data-lucide="play-circle"></i><span>5-02 Manual Calculation</span><em>Video</em></li>
+                    <li><i data-lucide="play-circle"></i><span>5-03 Manual Calculation</span><em>Video</em></li>
+                    <li><i data-lucide="play-circle"></i><span>5-04 Manual Calculation</span><em>Video</em></li>
+                    <li><i data-lucide="play-circle"></i><span>5-05 Manual Calculation</span><em>Video</em></li>
+                    <li><i data-lucide="play-circle"></i><span>5-06 Manual Calculation</span><em>Video</em></li>
+                    <li><i data-lucide="play-circle"></i><span>5-07 Manual Calculation</span><em>Video</em></li>
+                    <li><i data-lucide="play-circle"></i><span>5-08 Manual Calculation</span><em>Video</em></li>
+                  </ul>
+                </details>
+                <details class="curr-section">
+                  <summary><strong>Module 05 (Part II): Manual Calculation</strong><span>7 lectures</span></summary>
+                  <ul>
+                    <li><i data-lucide="play-circle"></i><span>5-09 Manual Calculation</span><em>Video</em></li>
+                    <li><i data-lucide="play-circle"></i><span>5-10 Manual Calculation</span><em>Video</em></li>
+                    <li><i data-lucide="play-circle"></i><span>5-11 Manual Calculation</span><em>Video</em></li>
+                    <li><i data-lucide="play-circle"></i><span>5-12 Manual Calculation</span><em>Video</em></li>
+                    <li><i data-lucide="play-circle"></i><span>5-13 Manual Calculation</span><em>Video</em></li>
+                    <li><i data-lucide="play-circle"></i><span>5-14 Manual Calculation</span><em>Video</em></li>
+                    <li><i data-lucide="play-circle"></i><span>5-15 Manual Calculation</span><em>Video</em></li>
+                  </ul>
+                </details>
+                <details class="curr-section">
+                  <summary><strong>Module 06: The AutoCAD Project</strong><span>54 lectures</span></summary>
+                  <ul>
+                    <li><i data-lucide="play-circle"></i><span>Parts I–VII — full AutoCAD plumbing project production</span><em>54 videos</em></li>
+                    <li><i data-lucide="play-circle"></i><span>Layout, risers, routing, schedules and coordinated drawings</span><em>Project</em></li>
+                  </ul>
+                </details>
+                <details class="curr-section">
+                  <summary><strong>Module 07: Advanced Systems</strong><span>7 lectures</span></summary>
+                  <ul>
+                    <li><i data-lucide="play-circle"></i><span>7-01 Advanced Systems</span><em>Video</em></li>
+                    <li><i data-lucide="play-circle"></i><span>7-02 Advanced Systems</span><em>Video</em></li>
+                    <li><i data-lucide="play-circle"></i><span>7-03 Advanced Systems</span><em>Video</em></li>
+                    <li><i data-lucide="play-circle"></i><span>7-04 Advanced Systems</span><em>Video</em></li>
+                    <li><i data-lucide="play-circle"></i><span>7-05 Advanced Systems</span><em>Video</em></li>
+                    <li><i data-lucide="play-circle"></i><span>7-06 Advanced Systems</span><em>Video</em></li>
+                    <li><i data-lucide="play-circle"></i><span>7-07 Advanced Systems</span><em>Video</em></li>
+                  </ul>
+                </details>
+              </div>
+            </article>
+
+            <article class="course-panel" id="panel-requirements" role="tabpanel" hidden>
+              <h2>Requirements</h2>
+              <ul class="course-req-list">
+                <li><i data-lucide="check-circle-2"></i> Basic computer literacy and familiarity with Windows</li>
+                <li><i data-lucide="check-circle-2"></i> Basic algebra and unit-conversion skills (used throughout the manual calculation modules)</li>
+                <li><i data-lucide="check-circle-2"></i> No prior AutoCAD or Revit experience required — both are taught from scratch</li>
+                <li><i data-lucide="check-circle-2"></i> No prior plumbing design experience required</li>
+              </ul>
+              <h3>Who this course is for</h3>
+              <ul class="course-audience-list">
+                <li>Mechanical engineers and MEP professionals involved in building design</li>
+                <li>BIM modelers and CAD technicians working on plumbing systems</li>
+                <li>Engineering students specializing in plumbing or building services</li>
+                <li>Recent graduates and career-starters entering plumbing design</li>
+                <li>Professionals seeking to elevate AutoCAD and Revit proficiency for MEP work</li>
+              </ul>
+            </article>
+
+            <article class="course-panel" id="panel-reviews" role="tabpanel" hidden>
+              <h2>Student reviews</h2>
+              <div class="course-reviews-empty">
+                <div class="course-reviews-score">0.0</div>
+                <p>No reviews yet for this course.</p>
+                <span>Be the first to share your experience after enrolling.</span>
+              </div>
+            </article>
+          </div>
+        </div>
+    </div>
+  </main>
+
+  <div class="course-mobile-buy" id="courseMobileBuy">
+    <div>
+      <strong>SAR 999.00</strong>
+      <span>AutoCAD Plumbing Design</span>
+    </div>
+    <a class="btn btn-primary" href="https://charter-center.com/courses/details/228/autocad-plumbing-design" target="_blank" rel="noopener">Buy now</a>
+  </div>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="logo" href="index.html"><img src="assets/img/logo.svg" alt="Charter Center" /></a>
+          <p>Charter Center for Training &amp; Development connects learners with high-quality courses crafted by industry experts.</p>
+        </div>
+        <div class="footer-pages"><h4>Pages</h4><ul>
+          <li><a href="index.html#courses">Courses</a></li>
+          <li><a href="index.html#categories">Explore Categories</a></li>
+          <li><a href="https://charter-center.com/about-us" target="_blank" rel="noopener">About Us</a></li>
+          <li><a href="https://charter-center.com/contact-us" target="_blank" rel="noopener">Contact</a></li>
+        </ul></div>
+        <div class="footer-policies"><h4>Policies</h4><ul>
+          <li><a href="https://charter-center.com/" target="_blank" rel="noopener">Terms of Use</a></li>
+          <li><a href="https://charter-center.com/" target="_blank" rel="noopener">Privacy Policy</a></li>
+          <li><a href="https://charter-center.com/help" target="_blank" rel="noopener">Help &amp; Support</a></li>
+        </ul></div>
+        <div class="footer-contact"><h4>Contact</h4><ul>
+          <li>Jeddah, Saudi Arabia</li>
+          <li><a href="tel:+966507379920">+966 50 737 9920</a></li>
+          <li><a href="mailto:info@charter-center.com">info@charter-center.com</a></li>
+        </ul></div>
+      </div>
+      <div class="footer-bottom"><span>© 2026 All Rights Reserved Charter-Center</span><span>Modern redesign preview</span></div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    (function () {
+      var tabs = document.querySelectorAll(".course-tabs button");
+      var panels = {
+        overview: document.getElementById("panel-overview"),
+        curriculum: document.getElementById("panel-curriculum"),
+        requirements: document.getElementById("panel-requirements"),
+        reviews: document.getElementById("panel-reviews")
+      };
+      tabs.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var id = btn.getAttribute("data-tab");
+          tabs.forEach(function (b) {
+            b.classList.toggle("is-active", b === btn);
+            b.setAttribute("aria-selected", b === btn ? "true" : "false");
+          });
+          Object.keys(panels).forEach(function (key) {
+            var panel = panels[key];
+            if (!panel) return;
+            var on = key === id;
+            panel.classList.toggle("is-active", on);
+            panel.hidden = !on;
+          });
+          if (window.lucide) lucide.createIcons({ attrs: { "stroke-width": 1.75 } });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
