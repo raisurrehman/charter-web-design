@@ -1,0 +1,138 @@
+[
+    {
+        "id":  4,
+        "name":  "BIM",
+        "slug":  "bim",
+        "icon":  "https://charter-center.com/storage/527/epgVkKMzr0QnHuKJDHhaLL5KB2q9vCtuyMeoUpE6XdLFXcQEqf9feJ8Y1cQ7.png",
+        "url":  "https://charter-center.com/courses/4/bim",
+        "subcategories":  [
+                              {
+                                  "id":  43,
+                                  "name":  "BIM 4D \u0026 5D (Time \u0026 Cost)"
+                              },
+                              {
+                                  "id":  27,
+                                  "name":  "BIM Architecture"
+                              },
+                              {
+                                  "id":  45,
+                                  "name":  "BIM for Facilities Management (6D/7D)"
+                              },
+                              {
+                                  "id":  44,
+                                  "name":  "BIM Management \u0026 Standards"
+                              },
+                              {
+                                  "id":  23,
+                                  "name":  "BIM MEP"
+                              },
+                              {
+                                  "id":  22,
+                                  "name":  "BIM Structure"
+                              }
+                          ]
+    },
+    {
+        "id":  3,
+        "name":  "Engineering",
+        "slug":  "engineering",
+        "icon":  "https://charter-center.com/storage/128/Gg77RRto5omR5Zq54QqXtRWMoEdH7xxglaRvp9QafEOmr3m1aog3lg8Zpg07.svg",
+        "url":  "https://charter-center.com/courses/3/engineering",
+        "subcategories":  [
+                              {
+                                  "id":  19,
+                                  "name":  "Architectural Engineering"
+                              },
+                              {
+                                  "id":  40,
+                                  "name":  "Chemical Engineering"
+                              },
+                              {
+                                  "id":  14,
+                                  "name":  "Civil Engineering"
+                              },
+                              {
+                                  "id":  20,
+                                  "name":  "Electrical Engineering"
+                              },
+                              {
+                                  "id":  21,
+                                  "name":  "Mechanical Engineering"
+                              },
+                              {
+                                  "id":  42,
+                                  "name":  "Petroleum \u0026amp; Gas Economics"
+                              }
+                          ]
+    },
+    {
+        "id":  2,
+        "name":  "HSE",
+        "slug":  "hse",
+        "icon":  "https://charter-center.com/storage/77/1V4t2JxITE7c1sT2pjYFa5nPcvlB41wHCnvKgZrAeo6647tmdfDNbetxV7Qb.svg",
+        "url":  "https://charter-center.com/courses/2/hse",
+        "subcategories":  [
+                              {
+                                  "id":  38,
+                                  "name":  "Fire Safety \u0026 NFPA Standards"
+                              },
+                              {
+                                  "id":  3,
+                                  "name":  "IOSH"
+                              },
+                              {
+                                  "id":  6,
+                                  "name":  "ISO (45001 and HSE-related Standards)"
+                              },
+                              {
+                                  "id":  2,
+                                  "name":  "OSHA"
+                              },
+                              {
+                                  "id":  29,
+                                  "name":  "Risk Assessment (Safety \u0026 HSE Risks)"
+                              }
+                          ]
+    },
+    {
+        "id":  1,
+        "name":  "Management",
+        "slug":  "management",
+        "icon":  "https://charter-center.com/storage/235/uARKNjh1iWfz9ksgU0e3H5KpT2TpfcubjW1FllDT1ac1mkUMJCV7a3fEWiTy.png",
+        "url":  "https://charter-center.com/courses/1/management",
+        "subcategories":  [
+                              {
+                                  "id":  35,
+                                  "name":  "Contract Management"
+                              },
+                              {
+                                  "id":  46,
+                                  "name":  "Facility Management"
+                              },
+                              {
+                                  "id":  37,
+                                  "name":  "KPIs \u0026 Dashboards"
+                              },
+                              {
+                                  "id":  31,
+                                  "name":  "Planning \u0026 Scheduling"
+                              },
+                              {
+                                  "id":  1,
+                                  "name":  "Project Management"
+                              },
+                              {
+                                  "id":  33,
+                                  "name":  "Quality Management"
+                              },
+                              {
+                                  "id":  30,
+                                  "name":  "Risk Management"
+                              },
+                              {
+                                  "id":  4,
+                                  "name":  "Risk Management (Project \u0026amp; Business Risks)"
+                              }
+                          ]
+    }
+]
