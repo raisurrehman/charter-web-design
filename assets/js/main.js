@@ -27,12 +27,10 @@
         : "Explore pathways";
       return (
         '<a class="cat-card" href="' + escapeHtml(c.url) + '" target="_blank" rel="noopener">' +
-          "<div>" +
-            '<img src="' + escapeHtml(c.icon || "") + '" alt="" loading="lazy" />' +
-            "<h3>" + escapeHtml(c.name) + "</h3>" +
-            "<span>" + escapeHtml(blurb) + "</span>" +
-            '<span class="cat-meta"><i data-lucide="arrow-up-right"></i> View courses</span>' +
-          "</div>" +
+          '<span class="cat-icon"><img src="' + escapeHtml(c.icon || "") + '" alt="" loading="lazy" /></span>' +
+          "<h3>" + escapeHtml(c.name) + "</h3>" +
+          '<p class="cat-blurb">' + escapeHtml(blurb) + "</p>" +
+          '<span class="cat-meta">View courses <i data-lucide="arrow-up-right"></i></span>' +
         "</a>"
       );
     }).join("");
@@ -46,24 +44,43 @@
     return '<div class="stars">' + "★".repeat(full) + "☆".repeat(5 - full) + "</div>";
   }
   function renderTestimonials() {
+    var grid = document.getElementById("quoteGrid");
     var track = document.getElementById("quoteTrack");
-    if (!track) return;
-    track.innerHTML = (TESTIMONIALS || []).map(function (t) {
+    var target = grid || track;
+    if (!target) return;
+    var list = (TESTIMONIALS || []).slice(0, grid ? 3 : undefined);
+    target.innerHTML = list.map(function (t) {
+      var quote = String(t.quote || "");
+      if (grid && quote.length > 180) quote = quote.slice(0, 177).replace(/\s+\S*$/, "") + "…";
       return '<article class="quote-card">' +
-        starsHtml(t.rating) +
-        "<p>" + escapeHtml(t.quote) + "</p>" +
+        (grid ? "" : starsHtml(t.rating)) +
         '<div class="quote-person"><img src="' + escapeHtml(t.avatar) + '" alt="" loading="lazy" />' +
         "<div><strong>" + escapeHtml(t.name) + "</strong><span>" + escapeHtml(t.role || "Customer") + "</span></div></div>" +
+        "<p>\"" + escapeHtml(quote) + "\"</p>" +
         "</article>";
     }).join("");
   }
   function renderInstructors() {
     var track = document.getElementById("instructorTrack");
     if (!track) return;
-    track.innerHTML = (INSTRUCTORS || []).map(function (p) {
-      return '<a class="instructor-card" href="' + escapeHtml(p.url || "https://charter-center.com/") + '" target="_blank" rel="noopener">' +
-        '<img src="' + escapeHtml(p.avatar) + '" alt="" loading="lazy" />' +
-        '<div class="info"><h3>' + escapeHtml(p.name) + "</h3><p>" + escapeHtml(p.title || "") + "</p></div></a>";
+    var list = document.body.classList.contains("page-home")
+      ? (INSTRUCTORS || []).slice(0, 12)
+      : (INSTRUCTORS || []);
+    track.innerHTML = list.map(function (p) {
+      var title = String(p.title || "Charter Instructor");
+      if (title.length > 72) title = title.slice(0, 69).replace(/\s+\S*$/, "") + "…";
+      var name = String(p.name || "")
+        .toLowerCase()
+        .replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+      return (
+        '<a class="instructor-card" href="' + escapeHtml(p.url || "https://charter-center.com/") + '" target="_blank" rel="noopener">' +
+          '<div class="instructor-photo"><img src="' + escapeHtml(p.avatar) + '" alt="" loading="lazy" /></div>' +
+          '<div class="info">' +
+            "<h3>" + escapeHtml(name) + "</h3>" +
+            "<p>" + escapeHtml(title) + "</p>" +
+            '<span class="instructor-cta">View profile <i data-lucide="arrow-up-right"></i></span>' +
+          "</div></a>"
+      );
     }).join("");
   }
   function setupSlider(trackId, prevId, nextId) {
@@ -82,6 +99,7 @@
   renderInstructors();
   setupSlider("quoteTrack", "quotePrev", "quoteNext");
   setupSlider("instructorTrack", "instPrev", "instNext");
+
   refreshIcons();
 
   /* Mobile nav */
@@ -90,7 +108,7 @@
   var mobileBackdrop = document.getElementById("mobileNavBackdrop");
   var mobileClose = document.getElementById("mobileClose");
 
-  function setMobileNav(open) {
+  function setMobileNav(open, focusSearch) {
     if (!mobileNav) return;
     if (open) {
       mobileNav.classList.add("open");
@@ -105,12 +123,13 @@
     if (mobileBackdrop) mobileBackdrop.setAttribute("aria-hidden", open ? "false" : "true");
     if (menuBtn) {
       menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
-      menuBtn.setAttribute("aria-label", open ? "Close menu" : "Menu");
-      menuBtn.innerHTML = open
-        ? '<i data-lucide="x"></i>'
-        : '<i data-lucide="menu"></i>';
     }
-    refreshIcons();
+    if (open && focusSearch) {
+      var searchInput = document.getElementById("mobileSidebarSearch");
+      if (searchInput) {
+        setTimeout(function () { searchInput.focus(); }, 280);
+      }
+    }
   }
 
   if (menuBtn && mobileNav) {
@@ -124,6 +143,13 @@
     });
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") setMobileNav(false);
+    });
+  }
+
+  var mobileSearchBtn = document.getElementById("mobileSearchBtn");
+  if (mobileSearchBtn && mobileNav) {
+    mobileSearchBtn.addEventListener("click", function () {
+      setMobileNav(true, true);
     });
   }
 
@@ -297,8 +323,13 @@
   var siteHeader = document.querySelector(".site-header");
   var heroEl = document.getElementById("hero");
   var footerEl = document.querySelector(".footer");
+  var isHomePage = document.body.classList.contains("page-home");
   function updateNavScroll() {
     if (!siteHeader || !heroEl) return;
+    if (isHomePage) {
+      siteHeader.classList.remove("is-scrolled");
+      return;
+    }
     var pastHero = window.scrollY >= heroEl.offsetTop + heroEl.offsetHeight - 80;
     var atFooter = false;
     if (footerEl) {
@@ -310,7 +341,7 @@
   updateNavScroll();
   window.addEventListener("scroll", updateNavScroll, { passive: true });
   window.addEventListener("resize", updateNavScroll);
-  /* Hero */
+  /* Hero — homepage keeps static Coursera-style copy; other pages can rotate */
   var heroSlides = [
     { img: "https://charter-center.com/storage/796/FLNCgW8GY8i4hsCEeEVQ9p7CI45INyw93sDDjHp3KTxLAsQTIVno79dUzeYP.png", title: "Prepare for the Certification You Need", lead: "Clear lessons, practice questions, and instructor support before your exam date." },
     { img: "https://charter-center.com/storage/795/aF27ersu9WtuS1fIOEe0gmAae7SfplehSP18ZUvvX2b3TS2YUV0emdYxge0H.png", title: "Learn Skills You Can Use at Work", lead: "Charter Center offers live and recorded courses in Management, Engineering, BIM, and HSE." },
@@ -326,14 +357,16 @@
     index = (i + heroSlides.length) % heroSlides.length;
     var s = heroSlides[index];
     if (heroImg) heroImg.src = s.img;
-    if (heroTitle) heroTitle.textContent = s.title;
-    if (heroLead) heroLead.textContent = s.lead;
+    if (!isHomePage) {
+      if (heroTitle) heroTitle.textContent = s.title;
+      if (heroLead) heroLead.textContent = s.lead;
+    }
     dots.forEach(function (d, n) { d.classList.toggle("active", n === index); });
   }
   dots.forEach(function (d) {
     d.addEventListener("click", function () { goHero(Number(d.getAttribute("data-go"))); });
   });
-  if (heroSlides.length) setInterval(function () { goHero(index + 1); }, 6500);
+  if (!isHomePage && heroSlides.length) setInterval(function () { goHero(index + 1); }, 6500);
 
   /* Course grid */
   var typeLabel = { "live-course": "Live Course", exam: "Exam Prep", course: "Record Course" };
@@ -350,17 +383,49 @@
     var label = typeLabel[c.type] || "Course";
     var url = c.id === 228 ? "course-detail.html" : (c.id === 225 ? "course-detail-live.html" : (c.url || "#"));
     var avatar = c.avatar || "https://charter-center.com/admin-lte-3/img/avatar.png";
+    var instructor = c.instructor || "Charter Instructor";
+    var rating = Number(c.rating);
+    var reviews = Number(c.reviews) || 0;
+    var ratingHtml =
+      rating > 0
+        ? ('<span class="course-rating"><i data-lucide="star"></i> ' + escapeHtml(rating.toFixed(1)) +
+          (reviews > 0 ? ' <span class="course-reviews">(' + escapeHtml(String(reviews)) + ")</span>" : "") +
+          "</span>")
+        : "";
+    var levelLine = [c.level, label].filter(Boolean).join(" · ");
+    var chips = "";
+    if (c.cert) chips += '<span class="course-chip">Certificate</span>';
+    if ((c.enrolled || 0) > 700) chips += '<span class="course-chip course-chip--hot">Trending</span>';
+    if (c.type === "live-course") chips += '<span class="course-chip">Live</span>';
+
+    if (isHomePage) {
+      return (
+        '<article class="course-card">' +
+          '<a class="course-media" href="' + escapeHtml(url) + '" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">' +
+            '<img src="' + escapeHtml(c.image || "") + '" alt="" loading="lazy" />' +
+            '<span class="course-badge ' + badge + '">' + label + "</span>" +
+          "</a>" +
+          '<div class="course-body">' +
+            '<div class="course-provider">' +
+              '<img src="' + escapeHtml(avatar) + '" alt="" width="22" height="22" />' +
+              "<span>" + escapeHtml(instructor) + "</span>" +
+            "</div>" +
+            '<h3 class="course-title"><a href="' + escapeHtml(url) + '" target="_blank" rel="noopener">' + escapeHtml(c.title) + "</a></h3>" +
+            '<div class="course-meta">' +
+              ratingHtml +
+              (levelLine ? '<span class="course-level">' + escapeHtml(levelLine) + "</span>" : "") +
+            "</div>" +
+            (chips ? '<div class="course-chips">' + chips + "</div>" : "") +
+          "</div></article>"
+      );
+    }
+
     var dateLine = c.date
       ? ('<p class="course-date"><i data-lucide="calendar-days"></i><span>' + escapeHtml(c.date) + (c.time ? (" · " + escapeHtml(c.time)) : "") + "</span></p>")
       : "";
-    var chips = "";
-    if (c.level) chips += '<span class="course-tag">' + escapeHtml(c.level) + "</span>";
-    if (c.cert) chips += '<span class="course-tag course-tag--cert"><i data-lucide="badge-check"></i> Certificate</span>';
-    var rating = Number(c.rating);
-    var ratingHtml =
-      rating > 0
-        ? ('<span class="course-rating"><i data-lucide="star"></i>' + escapeHtml(rating.toFixed(1)) + "</span>")
-        : "";
+    var legacyChips = "";
+    if (c.level) legacyChips += '<span class="course-tag">' + escapeHtml(c.level) + "</span>";
+    if (c.cert) legacyChips += '<span class="course-tag course-tag--cert"><i data-lucide="badge-check"></i> Certificate</span>';
     return (
       '<article class="course-card">' +
         '<a class="course-media" href="' + escapeHtml(url) + '" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">' +
@@ -372,10 +437,10 @@
           '<h3 class="course-title"><a href="' + escapeHtml(url) + '" target="_blank" rel="noopener">' + escapeHtml(c.title) + "</a></h3>" +
           '<div class="course-instructor">' +
             '<img src="' + escapeHtml(avatar) + '" alt="" width="32" height="32" />' +
-            "<span>" + escapeHtml(c.instructor || "Charter Instructor") + "</span>" +
+            "<span>" + escapeHtml(instructor) + "</span>" +
           "</div>" +
           dateLine +
-          (chips ? ('<div class="course-tags">' + chips + "</div>") : "") +
+          (legacyChips ? ('<div class="course-tags">' + legacyChips + "</div>") : "") +
           '<div class="course-foot">' +
             '<span class="course-enrolled"><i data-lucide="users"></i>' + (c.enrolled || 0) + " enrolled</span>" +
             '<a class="course-cta" href="' + escapeHtml(url) + '" target="_blank" rel="noopener">View course<i data-lucide="arrow-up-right"></i></a>' +
@@ -390,7 +455,8 @@
       grid.innerHTML = '<div class="course-empty">No courses available in this tab.</div>';
       return;
     }
-    grid.innerHTML = list.map(cardHtml).join("");
+    var items = isHomePage ? list.slice(0, 3) : list;
+    grid.innerHTML = items.map(cardHtml).join("");
     refreshIcons();
   }
   var cache = EMBEDDED_COURSES || {};
